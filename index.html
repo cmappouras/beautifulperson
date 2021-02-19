@@ -88,13 +88,11 @@
             let switchBt = document.getElementById("switchBt");
 
             //get answer (using onclick in js)
-            switchBt.onclick = function () {camBool!=camBool};
+            switchBt.onclick = function () {camBool = !camBool };
 
             if (camBool===true){
                 camIndex = 1;
-                console.log("hello");
-            }
-            else if (camBool===false){
+            } else {
                 camIndex = 0;
             }
 
