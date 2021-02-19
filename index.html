@@ -3,7 +3,7 @@
 
     <head>
         <meta charset="UTF-8">
-        <script type="text/javascript" src="js/instascan.min.js"></script>
+        <script type="text/javascript" src="qrCodejs/instascan.min.js"></script>
         <title>QR Code Reader</title>
 
 
@@ -32,7 +32,7 @@
     <body>
 
         <button id="switchBt" class="switchBt" style="margin: 0.5em; padding: 0.5em">Switch</button>
-        
+
         <div class="qrDropdown">
             <button id="qrBtn" class="qrBtn">Dropdown</button>
             <div id="qrContent" class="div-content">
@@ -42,7 +42,7 @@
             </div>
         </div>
 
-        
+
 
         <script>
             var opts = {
@@ -84,23 +84,25 @@
             };
 
             let camIndex = 0;
-            let camBool = false;
             let switchBt = document.getElementById("switchBt");
 
             //get answer (using onclick in js)
-            switchBt.onclick = function () {camBool = !camBool };
 
-            if (camBool===true){
-                camIndex = 1;
-            } else {
-                camIndex = 0;
-            }
 
             var scanner = new Instascan.Scanner(opts);
 
             Instascan.Camera.getCameras().then(function (cameras) {
                 if (cameras.length > 0) {
-                    scanner.start(cameras[camIndex]);
+                    scanner.start(cameras[1]);
+
+                    switchBt.onclick = function ()
+                    {
+                        if (camIndex < cameras.length[-1]) {
+                            camIndex++;
+                        } else {
+                            camIndex = 0;
+                        }
+                    };
                 } else {
                     console.error('No cameras found.');
                     alert("No cameras found.");
