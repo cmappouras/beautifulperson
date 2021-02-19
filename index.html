@@ -1,97 +1,96 @@
-!DOCTYPE html
-html lang=en
+<!DOCTYPE html>
+<html lang="en">
 
-    head
-        meta charset=UTF-8
-        script type=textjavascript src=qrCodejsinstascan.min.jsscript
-        titleQR Code Readertitle
+    <head>
+        <meta charset="UTF-8">
+        <script type="text/javascript" src="qrCodejs/instascan.min.js"></script>
+        <title>QR Code Reader</title>
 
 
-        style
+        <style>
             .qrBtn {
-                background-color #4CAF50;
-                color white;
-                padding 16px;
-                font-size 16px;
-                border none;
-                cursor pointer;
+                background-color: #4CAF50;
+                color: white;
+                padding: 16px;
+                font-size: 16px;
+                border: none;
+                cursor: pointer;
             }
 
             .div-content {
-                display none;
-                position absolute;
-                background-color #f9f9f9;
-                min-width 160px;
-                overflow auto;
-                box-shadow 0px 8px 16px 0px rgba(0,0,0,0.2);
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                min-width: 160px;
+                overflow: auto;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
             }
-            .show {displayblock;}
-        style
-    head
+            .show {display:block;}
+        </style>
+    </head>
 
-    body
+    <body>
 
-        div class=qrDropdown
-            button id=qrBtn class=qrBtnDropdownbutton
-            div id=qrContent class=div-content
-                video id=previewvideo
+        <div class="qrDropdown">
+            <button id="qrBtn" class="qrBtn">Dropdown</button>
+            <div id="qrContent" class="div-content">
+                <video id="preview"></video>
 
-                div style=margin 0.5em; padding 0.5em; color black; text-align center; id=contentdiv
-            div
-        div
+                <div style="margin: 0.5em; padding: 0.5em; color: black; text-align: center;" id="content"></div>
+            </div>
+        </div>
 
-        button id=switchBt class=switchBt style=margin 0.5em; padding 0.5emSwitchbutton
+        <button id="switchBt" class="switchBt" style="margin: 0.5em; padding: 0.5em">Switch</button>
 
-        script
+        <script>
             var opts = {
 
-                 Whether to scan continuously for QR codes. If false, use scanner.scan() to
-                 manually scan. If true, the scanner emits the scan event when a QR code is
-                 scanned. Default true.
+                // Whether to scan continuously for QR codes. If false, use scanner.scan() to
+                // manually scan. If true, the scanner emits the "scan" event when a QR code is
+                // scanned. Default true.
 
-                continuous true,
+                continuous: true,
 
-                 The HTML element to use for the camera's video preview. Must be a video
-                 element. When the camera is active, this element will have the active CSS
-                 class, otherwise, it will have the inactive class. By default, an invisible
-                 element will be created to host the video.
-                video document.getElementById('preview'),
+                // The HTML element to use for the camera's video preview. Must be a <video>
+                // element. When the camera is active, this element will have the "active" CSS
+                // class, otherwise, it will have the "inactive" class. By default, an invisible
+                // element will be created to host the video.
+                video: document.getElementById('preview'),
 
-                 Whether to horizontally mirror the video preview. This is helpful when trying to
-                 scan a QR code with a user-facing camera. Default true.
-                mirror true,
+                // Whether to horizontally mirror the video preview. This is helpful when trying to
+                // scan a QR code with a user-facing camera. Default true.
+                mirror: true,
 
-                 Whether to include the scanned image data as part of the scan result. See the
-                 scan event for image format details. Default false.
-                captureImage false,
+                // Whether to include the scanned image data as part of the scan result. See the
+                // "scan" event for image format details. Default false.
+                captureImage: false,
 
-                 Only applies to continuous mode. Whether to actively scan when the tab is not
-                 active.
-                 When false, this reduces CPU usage when the tab is not active. Default true.
-                backgroundScan true,
+                // Only applies to continuous mode. Whether to actively scan when the tab is not
+                // active.
+                // When false, this reduces CPU usage when the tab is not active. Default true.
+                backgroundScan: true,
 
-                 Only applies to continuous mode. The period, in milliseconds, before the same QR
-                 code will be recognized in succession. Default 5000 (5 seconds).
-                refractoryPeriod 5000,
+                // Only applies to continuous mode. The period, in milliseconds, before the same QR
+                // code will be recognized in succession. Default 5000 (5 seconds).
+                refractoryPeriod: 5000,
 
-                 Only applies to continuous mode. The period, in rendered frames, between scans. A
-                 lower scan period increases CPU usage but makes scan response faster.
-                 Default 1 (i.e. analyze every frame).
-                scanPeriod 1
+                // Only applies to continuous mode. The period, in rendered frames, between scans. A
+                // lower scan period increases CPU usage but makes scan response faster.
+                // Default 1 (i.e. analyze every frame).
+                scanPeriod: 1
 
             };
 
             let camIndex = 0;
             let camBool = false;
-            let switchBt = document.getElementById(switchBt);
+            let switchBt = document.getElementById("switchBt");
 
-            get answer (using onclick in js)
-            switchBt.onclick = function () {camBool=true};
+            //get answer (using onclick in js)
+            switchBt.onclick = function () {camBool = !camBool};
 
             if (camBool){
                 camIndex = 1;
-                console.log(hello);
-                camBool=true;
+                console.log("hello");
             }
             else if (camBool===false){
                 camIndex = 0;
@@ -101,11 +100,11 @@ html lang=en
             var scanner = new Instascan.Scanner(opts);
 
             Instascan.Camera.getCameras().then(function (cameras) {
-                if (cameras.length  0) {
+                if (cameras.length > 0) {
                     scanner.start(cameras[camIndex]);
                 } else {
                     console.error('No cameras found.');
-                    alert(No cameras found.);
+                    alert("No cameras found.");
                 }
             }).catch(function (e) {
                 console.error(e);
@@ -113,22 +112,22 @@ html lang=en
 
             scanner.addListener('scan', function (content) {
                 console.log(content);
-                document.getElementById(content).innerHTML = content;
+                document.getElementById("content").innerHTML = content;
             });
 
-             Functionality to showhide the qr code reader 
+            /* Functionality to show/hide the qr code reader */
 
-             Get the button, and when the user clicks on it, execute myFunction
-            document.getElementById(qrBtn).onclick = function() {showHide()};
+            // Get the button, and when the user clicks on it, execute myFunction
+            document.getElementById("qrBtn").onclick = function() {showHide()};
 
-             myFunction toggles between adding and removing the show class,
-            which is used to hide and show the dropdown content 
+            /* myFunction toggles between adding and removing the show class,
+            which is used to hide and show the dropdown content */
             function showHide() {
-                document.getElementById(qrContent).classList.toggle(show);
+                document.getElementById("qrContent").classList.toggle("show");
             }
 
-        script
+        </script>
 
-    body
+    </body>
 
-html
+</html>
