@@ -93,7 +93,7 @@
 
             Instascan.Camera.getCameras().then(function (cameras) {
                 if (cameras.length > 0) {
-                    scanner.start(cameras[1]);
+                    scanner.start(cameras[0]);
 
                     switchBt.onclick = function ()
                     {
@@ -102,6 +102,8 @@
                         } else {
                             camIndex = 0;
                         }
+                        let camera = cameraArray[camIndex];
+                        scanner.start(camera);
                     };
                 } else {
                     console.error('No cameras found.');
