@@ -100,8 +100,8 @@
             function changeCamera() {
                 console.log("test");
                 if (0 < cameras.length[-1]) {
-                    let cam = cameras[1];
-                    scanner.start(cam);
+                    let cam = cameras[-1];
+                    scanner.start(cameras[-1]);
                 } else {
                     let cam = cameras[0];
                     scanner.start(cam);
