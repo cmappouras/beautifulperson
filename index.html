@@ -84,12 +84,13 @@
 
             var scanner = new Instascan.Scanner(opts);
   
+            // Get the button, and when the user clicks on it, execute myFunction
+            document.getElementById("switch").onclick = function() {changeCamera()};
             
             Instascan.Camera.getCameras().then(function (cameras) {
                 if (cameras.length > 0) {
                     scanner.start(cameras[0]);
-                    // Get the button, and when the user clicks on it, execute myFunction
-                    document.getElementById("switch").onclick = function() {changeCamera()};
+
                 } else {
                     console.error('No cameras found.');
                     alert("No cameras found.");
@@ -99,13 +100,7 @@
             let camIndex = 0;
                 
             function changeCamera() {
-                let camIndex = 0;
-                console.log("test");
-                if (camIndex < cameras.length[-1]) {
-                    camIndex =1;
-                } else {
-                    camIndex = 0;
-                }
+                camIndex++;
                 let camera = cameras[camIndex];
                 scanner.start(camera);
             }
