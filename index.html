@@ -91,6 +91,19 @@
                     console.error('No cameras found.');
                     alert("No cameras found.");
                 }
+             // Get the button, and when the user clicks on it, execute myFunction
+            document.getElementById("switch").onclick = function() {changeCamera()};
+            
+            function changeCamera() {
+                if (camIndex < cameras.length[-1]) {
+                    camIndex++;
+                } else {
+                    camIndex = 0;
+                }
+                let cam = cameras[camIndex];
+                scanner.start(cam);
+            }
+                
             }).catch(function (e) {
                 console.error(e);
             });
@@ -111,18 +124,7 @@
                 document.getElementById("qrContent").classList.toggle("show");
             }
             
-            // Get the button, and when the user clicks on it, execute myFunction
-            document.getElementById("switch").onclick = function() {changeCamera()};
-            
-            function changeCamera() {
-                if (camIndex < cameras.length[-1]) {
-                    camIndex++;
-                } else {
-                    camIndex = 0;
-                }
-                let cam = cameras[camIndex];
-                scanner.start(cam);
-            }
+
 
         </script>
 
