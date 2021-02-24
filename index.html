@@ -84,13 +84,6 @@
 
             var scanner = new Instascan.Scanner(opts);
   
-            let camIndex = 0;
-                
-            function changeCamera() {
-                camIndex++;
-                let camera = cameras[camIndex];
-                scanner.start(camera);
-            }
             
             Instascan.Camera.getCameras().then(function (cameras) {
                 if (cameras.length > 0) {
@@ -101,7 +94,16 @@
                 } else {
                     console.error('No cameras found.');
                     alert("No cameras found.");
-                }                
+                }              
+                
+            let camIndex = 0;
+                
+            function changeCamera() {
+                camIndex++;
+                let camera = cameras[camIndex];
+                scanner.start(camera);
+            }
+                
             }).catch(function (e) {
                 console.error(e);
             });
