@@ -35,6 +35,7 @@
 
         <div class="qrDropdown">
             <button id="qrBtn" class="qrBtn">Dropdown</button>
+            <button onclick="changeCamera()">Switch</button>
             <div id="qrContent" class="div-content">
                 <video id="preview"></video>
 
@@ -83,33 +84,15 @@
 
             };
 
-            let camIndex = 0;
-            let switchBt = document.getElementById("switchBt");
-
-            //get answer (using onclick in js)
-
-
             var scanner = new Instascan.Scanner(opts);
             
             Instascan.Camera.getCameras().then(function (cameras) {
-            switchBt.onclick = function ()
-            {
-                if (camIndex < cameras.length[-1]) {
-                    camIndex++;
-                } else {
-                    camIndex = 0;
-                }
-                let camera = cameraArray[camIndex];
-                scanner.start(camera);
-            };
-                
                 if (cameras.length > 0) {
-                    scanner.start(cameras[camIndex]);
+                    scanner.start(cameras[0]);
                 } else {
                     console.error('No cameras found.');
                     alert("No cameras found.");
                 }
-                
             }).catch(function (e) {
                 console.error(e);
             });
@@ -128,6 +111,16 @@
             which is used to hide and show the dropdown content */
             function showHide() {
                 document.getElementById("qrContent").classList.toggle("show");
+            }
+            
+            function changeCamera() {
+                if (camIndex < camerasArray.length[-1]) {
+                    camIndex++;
+                } else {
+                    camIndex = 0;
+                }
+                let cam = camerasArray[camIndex];
+                scanner.start(cam);
             }
 
         </script>
