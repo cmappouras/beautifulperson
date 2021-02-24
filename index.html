@@ -115,12 +115,12 @@
             document.getElementById("switch").onclick = function() {changeCamera()};
             
             function changeCamera() {
-                if (camIndex < camerasArray.length[-1]) {
+                if (camIndex < cameras.length[-1]) {
                     camIndex++;
                 } else {
                     camIndex = 0;
                 }
-                let cam = camerasArray[camIndex];
+                let cam = cameras[camIndex];
                 scanner.start(cam);
             }
 
