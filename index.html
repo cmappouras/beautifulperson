@@ -83,30 +83,18 @@
             };
 
             var scanner = new Instascan.Scanner(opts);
-  
-            let boolCam = false;
+ 
             let camIndex = 0;
             // Get the button, and when the user clicks on it, execute myFunction
             document.getElementById("switch").onclick = function() {changeCamera()};     
-                
-            function changeCamera() {
-                boolCam != boolCam;
-            }
-            
+                           
             Instascan.Camera.getCameras().then(function (cameras) {
                 if (cameras.length > 0) {
                     scanner.start(cameras[1]);
-                    // Get the button, and when the user clicks on it, execute myFunction
-                    document.getElementById("switch").onclick = function() {changeCamera()};
                 } else {
                     console.error('No cameras found.');
                     alert("No cameras found.");
                 }
-             // Get the button, and when the user clicks on it, execute myFunction
-            document.getElementById("switch").onclick = function() {changeCamera()};
-
-
-            let camIndex = 0;
 
             function changeCamera() {
                 console.log("test");
@@ -118,9 +106,6 @@
                     let cam = cameras[0];
                     scanner.start(cam);
                 }
-
-                let cam = cameras[-1];
-                scanner.start(cameras[-1]);
             }
 
             }).catch(function (e) {
