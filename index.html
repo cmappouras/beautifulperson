@@ -83,6 +83,7 @@
             };
 
             var scanner = new Instascan.Scanner(opts);
+            var camIndex = 0;
             
             Instascan.Camera.getCameras().then(function (cameras) {
                 if (cameras.length > 0) {
