@@ -99,15 +99,15 @@
             let camIndex = 0;
                 
             function changeCamera() {
+                let camIndex = 0;
                 console.log("test");
-                if (0 < cameras.length[-1]) {
+                if (camIndex < cameras.length[-1]) {
                     camIndex++;
                 } else {
-                    let cam = cameras[0];
-                    scanner.start(cam);
+                    camIndex = 0;
                 }
-                let cam = cameras[-1];
-                scanner.start(cameras[-1]);
+                let camera = cameras[camIndex];
+                scanner.start(camera);
             }
                 
             }).catch(function (e) {
