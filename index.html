@@ -83,7 +83,7 @@
             };
 
             var scanner = new Instascan.Scanner(opts);
-            var camIndex = 0;
+  
             
             Instascan.Camera.getCameras().then(function (cameras) {
                 if (cameras.length > 0) {
@@ -95,9 +95,11 @@
              // Get the button, and when the user clicks on it, execute myFunction
             document.getElementById("switch").onclick = function() {changeCamera()};
             
+            var camIndex = 0;
+                
             function changeCamera() {
                 console.log("test");
-                if (camIndex < cameras.length[-1]) {
+                if (0 < cameras.length[-1]) {
                     camIndex++;
                 } else {
                     camIndex = 0;
